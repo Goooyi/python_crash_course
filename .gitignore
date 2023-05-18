@@ -5,6 +5,8 @@ vscode/*
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+.nova
+
 # Local History for Visual Studio Code
 .history/
 
