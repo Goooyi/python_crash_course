@@ -11,6 +11,7 @@ from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
 
+
 class AlienInvasion:
     """manage game resources and behavior"""
 
@@ -19,13 +20,15 @@ class AlienInvasion:
         pygame.init()
 
         self.settings = Settings()
-        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
+        self.screen = pygame.display.set_mode(
+            (self.settings.screen_width, self.settings.screen_height)
+        )
         # self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
 
-        pygame.display.set_caption('Alien Invasion')
-        
+        pygame.display.set_caption("Alien Invasion")
+
         # create an instance to store game statistics
         self.stats = GameStats(self)
         self.sb = Scoreboard(self)
@@ -65,7 +68,6 @@ class AlienInvasion:
             # empty left aliens and bullets
             self.aliens.empty()
             self.bullets.empty()
-
 
             # create new alines ships
             self._create_fleet()
@@ -136,7 +138,7 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = 2 * alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
-        
+
     def _check_aliens_bottom(self):
         screen_rect = self.screen.get_rect()
         for alien in self.aliens.sprites():
@@ -152,13 +154,15 @@ class AlienInvasion:
         number_aliens_x = available_space_x // (2 * alien_width)
 
         ship_height = self.ship.rect.height
-        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        available_space_y = (
+            self.settings.screen_height - (3 * alien_height) - ship_height
+        )
         number_rows = available_space_y // (2 * alien_height)
 
         for row_number in range(number_rows):
             for alien_number in range(number_aliens_x):
                 self._create_alien(alien_number, row_number)
-    
+
     def _check_fleet_edges(self):
         for alien in self.aliens.sprites():
             if alien.check_edges():
@@ -194,7 +198,7 @@ class AlienInvasion:
         else:
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
-    
+
     def _update_screen(self):
         """update the screen"""
         self.screen.fill(self.settings.bg_color)
@@ -206,7 +210,7 @@ class AlienInvasion:
 
         # display the score
         self.sb.show_score()
-        
+
         if not self.stats.game_active:
             self.play_button.draw_button()
         # make recently drawn graphics visible
@@ -222,6 +226,7 @@ class AlienInvasion:
                 self._update_aliens()
             self._update_screen()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     ai = AlienInvasion()
     ai.run_game()
