@@ -129,7 +129,7 @@ class AlienInvasion:
             self.stats.level += 1
             self.sb.prep_level()
 
-    def _create_alien(self, alien_number, row_number):
+    def _create_alien(self, alien_number: int, row_number: int):
         alien = Alien(self)
         alien_width, alien_height = alien.rect.size
         alien.x = alien_width + 2 * alien_width * alien_number
